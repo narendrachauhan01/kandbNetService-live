@@ -77,7 +77,7 @@ function OurPartner() {
 
                     <div className='text-center overflow-hidden'>
                         <img src={p6} alt="Partner 1" className=' w-6xl  sm:w-6xl md:w-7xl mx-auto  rounded-2xl' />
-                        <span className='text-white text-xs md:text-[15px] lg:text-[15px] xl:text-[15px] 2xl:text-[15px]'>Railway Station Ahmedabad, Gujarat</span>
+                        <span className='text-white text-xs md:text-[15px] lg:text-[15px] xl:text-[15px] 2xl:text-[15px]'>Railway Station, Ahmedabad</span>
 
                     </div>
 

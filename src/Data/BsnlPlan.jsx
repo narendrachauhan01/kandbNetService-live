@@ -15,7 +15,7 @@ function BsnlPlan() {
             {/* Header */}
             <div className="text-center p-6 font-bold font-poppins md:text-3xl text-white  ">
                 <p className="text-black">
-                    <span className="text-amber-600">Superfast Internet</span> + <span className="text-green-500">SkyPro BSNL IFTV</span>
+                    <span className="text-amber-600 text-lg">Superfast Internet</span> + <span className="text-green-500 text-lg">SkyPro BSNL IFTV</span>
                 </p>
             </div>
 
