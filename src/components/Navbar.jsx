@@ -19,10 +19,10 @@ function Navbar() {
             <ul className=' gap-8 font-semibold text-[16px]  md:flex hidden font-poppins'>
                 <li className="hover:text-lime-600"><Link to="/">Home</Link></li>
                 <li className="hover:text-lime-600"><Link to="/plans">Broadband Plans</Link></li>
-                <li className="hover:text-lime-600"><Link to="/privacy-policy">Privacy Policy</Link></li>
+                <li className="hover:text-lime-600"><Link to="/my-Connection">My Connection</Link></li>
                 <li className="hover:text-lime-600"><Link to="/customer-reviews">Customer-Reviews</Link></li>
                 <li className="hover:text-lime-600"><Link to="/contact-us">Enquire Now</Link></li>
-                <li className="hover:text-lime-600"><Link to="/my-Connection">My Connection</Link></li>
+                <li className="hover:text-lime-600"><Link to="/privacy-policy">Privacy Policy</Link></li>
 
 
 
@@ -35,10 +35,11 @@ function Navbar() {
                  p-10  top-[71px] md:hidden  rounded bg-gray-100'>
                     <li className="hover:text-lime-600"><Link to="/" onClick={() => setIsOpen(false)}> Home</Link></li>
                     <li className="hover:text-lime-600"><Link to="/plans" onClick={() => setIsOpen(false)}> Broadband Plans</Link></li>
-                    <li className="hover:text-lime-600"><Link to="/privacy-policy" onClick={() => setIsOpen(false)}> Privacy Policy</Link></li>
+                    <li className="hover:text-lime-600"><Link to="/my-Connection" onClick={() => setIsOpen(false)}> My Connection</Link></li>
                     <li className="hover:text-lime-600"><Link to="/customer-reviews" onClick={() => setIsOpen(false)}> Customer Reviews</Link></li>
                     <li className="hover:text-lime-600"><Link to="/contact-us" onClick={() => setIsOpen(false)}> Enquire Now</Link></li>
-                    <li className="hover:text-lime-600"><Link to="/my-Connection" onClick={() => setIsOpen(false)}> My Connection</Link></li>
+                    <li className="hover:text-lime-600"><Link to="/privacy-policy" onClick={() => setIsOpen(false)}> Privacy Policy</Link></li>
+
 
                 </ul>
             )}
