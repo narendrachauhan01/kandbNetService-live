@@ -11,6 +11,7 @@ import imageRoutes from './routes/images.js';
 import inquiryRoutes from './routes/inquiries.js';
 import reviewRoutes from './routes/reviews.js';
 import otpRoutes from './routes/otp.js';
+import socialLinksRoutes from './routes/socialLinks.js';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/images', imageRoutes);
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/otp', otpRoutes);
+app.use('/api/social-links', socialLinksRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
 
