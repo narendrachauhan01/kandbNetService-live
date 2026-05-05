@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import banner1 from '../assets/bannerImage/banner-1.png'
-import banner2 from '../assets/bannerImage/banner-2.jpg'
 import banner3 from '../assets/bannerImage/banner-3.jpeg'
 import banner4 from '../assets/bannerImage/banner-4.jpeg'
 import InternetPlan from '../Data/InternetPlan'
@@ -13,7 +12,6 @@ import { getBanners } from '../api/api'
 
 const staticBanners = [
   { imageUrl: banner1, title: '' },
-  { imageUrl: banner2, title: '' },
   { imageUrl: banner3, title: '' },
   { imageUrl: banner4, title: '' },
 ]
