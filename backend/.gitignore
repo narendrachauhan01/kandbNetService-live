@@ -2,3 +2,7 @@ package-lock.json
 node_modules/
 .env
 uploads/*.zip
+
+uploads/images
+uploads/reviews
+uploads/banners

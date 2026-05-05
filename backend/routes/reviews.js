@@ -8,6 +8,19 @@ import authMiddleware from '../middleware/authMiddleware.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import fs from 'fs/promises';
+
+async function safeUnlink(imageUrl) {
+  if (!imageUrl || !imageUrl.startsWith('/uploads/')) return;
+  const filePath = path.join(__dirname, '..', imageUrl);
+  try {
+    await fs.unlink(filePath);
+  } catch (err) {
+    if (err.code !== 'ENOENT') console.error('Failed to delete file:', filePath, err.message);
+  }
+}
+
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads/reviews')),
   filename: (req, file, cb) => {
@@ -77,7 +90,8 @@ router.put('/:id', authMiddleware, async (req, res) => {
 // Admin — delete review
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    await Review.findByIdAndDelete(req.params.id);
+    const review = await Review.findByIdAndDelete(req.params.id);
+    if (review) await safeUnlink(review.imageUrl);
     res.json({ message: 'Deleted' });
   } catch {
     res.status(500).json({ message: 'Server error' });

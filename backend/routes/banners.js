@@ -9,6 +9,19 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import fs from 'fs/promises';
+
+async function safeUnlink(imageUrl) {
+  if (!imageUrl || !imageUrl.startsWith('/uploads/')) return;
+  const filePath = path.join(__dirname, '..', imageUrl);
+  try {
+    await fs.unlink(filePath);
+  } catch (err) {
+    if (err.code !== 'ENOENT') console.error('Failed to delete file:', filePath, err.message);
+  }
+}
+
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads/banners')),
   filename: (req, file, cb) => {
@@ -64,6 +77,7 @@ router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
 // Admin — update banner
 router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
   try {
+    const old = req.file ? await Banner.findById(req.params.id) : null;
     const update = {
       title: req.body.title || '',
       subtitle: req.body.subtitle || '',
@@ -73,6 +87,7 @@ router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
     if (req.file) update.imageUrl = `/uploads/banners/${req.file.filename}`;
     const banner = await Banner.findByIdAndUpdate(req.params.id, update, { new: true });
     if (!banner) return res.status(404).json({ message: 'Banner not found' });
+    if (old?.imageUrl) await safeUnlink(old.imageUrl);
     res.json(banner);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -82,7 +97,8 @@ router.put('/:id', authMiddleware, upload.single('image'), async (req, res) => {
 // Admin — delete banner
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    await Banner.findByIdAndDelete(req.params.id);
+    const banner = await Banner.findByIdAndDelete(req.params.id);
+    if (banner) await safeUnlink(banner.imageUrl);
     res.json({ message: 'Banner deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });
