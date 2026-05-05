@@ -6,7 +6,7 @@ import {
 import { FaShieldAlt, FaHandshake, FaUserShield, FaDatabase } from 'react-icons/fa'
 
 const COMPANY = 'K&B Net Service'
-const WEBSITE = 'https://narendrasingh.wewp.io'
+const WEBSITE = 'https://kandbnetservice.in'
 const CONTACT_EMAIL = 'kandbnetservice3517@gmail.com'
 const HELPDESK = ['079-2999-1999', '079-2999-2999']
 const EFFECTIVE_DATE = 'October 7, 2025'
