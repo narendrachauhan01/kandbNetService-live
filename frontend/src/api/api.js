@@ -153,6 +153,15 @@ export const updateInquiryStatus = (id, status) =>
   });
 export const deleteInquiry = (id) => adminFetch(`${API}/inquiries/${id}`, { method: 'DELETE' });
 
+// Social Links
+export const getSocialLinks = () => safeFetch(`${API}/social-links`);
+export const updateSocialLinks = (data) =>
+  adminFetch(`${API}/social-links`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
 // Admin — Site Images
 export const getAllImages = (sec) => adminFetch(`${API}/images/all${sec ? `?section=${sec}` : ''}`);
 export const uploadSiteImage = (fd) => adminFetch(`${API}/images`, { method: 'POST', body: fd });

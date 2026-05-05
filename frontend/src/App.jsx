@@ -19,6 +19,7 @@ import AdminPlans from './admin/AdminPlans'
 import AdminInquiries from './admin/AdminInquiries'
 import AdminClosedInquiries from './admin/AdminClosedInquiries'
 import AdminImages from './admin/AdminImages'
+import AdminSocialLinks from './admin/AdminSocialLinks'
 import ProtectedRoute from './admin/ProtectedRoute'
 
 function AppContent() {
@@ -49,6 +50,7 @@ function AppContent() {
         <Route path="/admin/inquiries" element={<ProtectedRoute><AdminInquiries /></ProtectedRoute>} />
         <Route path="/admin/closed-inquiries" element={<ProtectedRoute><AdminClosedInquiries /></ProtectedRoute>} />
         <Route path="/admin/images" element={<ProtectedRoute><AdminImages /></ProtectedRoute>} />
+        <Route path="/admin/social-links" element={<ProtectedRoute><AdminSocialLinks /></ProtectedRoute>} />
       </Routes>
 
       {!isAdmin && <Footer />}

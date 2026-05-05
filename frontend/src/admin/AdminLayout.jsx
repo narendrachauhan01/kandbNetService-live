@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   MdDashboard, MdImage, MdLogout, MdMenu, MdInbox, MdClose, MdNotifications, MdCheckCircle, MdPhotoLibrary,
 } from 'react-icons/md';
-import { FaListAlt, FaUserAlt, FaPhone } from 'react-icons/fa';
+import { FaListAlt, FaUserAlt, FaPhone, FaShareAlt } from 'react-icons/fa';
 import logo from '../assets/LogoImage/logo1.jpeg';
 import { getAllInquiries } from '../api/api';
 
@@ -14,6 +14,7 @@ const navItems = [
   { path: '/admin/inquiries', label: 'Inquiries', icon: <MdInbox size={20} /> },
   { path: '/admin/closed-inquiries', label: 'Closed', icon: <MdCheckCircle size={20} /> },
   { path: '/admin/images', label: 'Site Images', icon: <MdPhotoLibrary size={20} /> },
+  { path: '/admin/social-links', label: 'Social Links', icon: <FaShareAlt size={17} /> },
 ];
 
 function formatTime(dateStr) {

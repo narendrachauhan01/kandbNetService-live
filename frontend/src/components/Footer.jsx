@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaPhone, FaWifi } from 'react-icons/fa'
+import { FaFacebookF, FaLinkedinIn, FaYoutube, FaPhone, FaWifi } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
 import logo from '../assets/LogoImage/logo1.jpeg'
+import { getSocialLinks } from '../api/api'
 
 const quickLinks = [
   { to: '/', label: 'Home' },
@@ -14,15 +15,27 @@ const quickLinks = [
   { to: '/privacy-policy', label: 'Privacy Policy' },
 ]
 
-const socials = [
-  { href: 'https://www.facebook.com/kandbnetservice', icon: <FaFacebookF size={15} />, label: 'Facebook', hover: 'hover:bg-blue-600' },
-  { href: 'https://www.youtube.com/@kbnet2199', icon: <FaYoutube size={15} />, label: 'YouTube', hover: 'hover:bg-red-600' },
-  { href: '#', icon: <FaXTwitter size={15} />, label: 'Twitter', hover: 'hover:bg-gray-600' },
-  { href: '#', icon: <FaInstagram size={15} />, label: 'Instagram', hover: 'hover:bg-pink-600' },
-  { href: '#', icon: <FaLinkedinIn size={15} />, label: 'LinkedIn', hover: 'hover:bg-blue-700' },
-]
-
 function Footer() {
+  const [socialUrls, setSocialUrls] = useState({ facebook: '#', youtube: '#', twitter: '#', linkedin: '#' })
+
+  useEffect(() => {
+    getSocialLinks().then((data) => {
+      if (data) setSocialUrls({
+        facebook: data.facebook || '#',
+        youtube:  data.youtube  || '#',
+        twitter:  data.twitter  || '#',
+        linkedin: data.linkedin || '#',
+      })
+    })
+  }, [])
+
+  const socials = [
+    { href: socialUrls.facebook, icon: <FaFacebookF size={15} />, label: 'Facebook', hover: 'hover:bg-blue-600' },
+    { href: socialUrls.youtube,  icon: <FaYoutube size={15} />,   label: 'YouTube',  hover: 'hover:bg-red-600' },
+    { href: socialUrls.twitter,  icon: <FaXTwitter size={15} />,  label: 'Twitter',  hover: 'hover:bg-gray-600' },
+    { href: socialUrls.linkedin, icon: <FaLinkedinIn size={15} />, label: 'LinkedIn', hover: 'hover:bg-blue-700' },
+  ]
+
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
