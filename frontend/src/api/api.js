@@ -1,11 +1,26 @@
 const API = import.meta.env.VITE_API_URL || '/api';
+const UPLOADS_BASE = import.meta.env.VITE_UPLOADS_URL || '';
+
+function absolutize(data) {
+  if (!data || typeof data !== 'object') return data;
+  if (Array.isArray(data)) return data.map(absolutize);
+  const out = { ...data };
+  if (typeof out.imageUrl === 'string' && out.imageUrl.startsWith('/uploads/')) {
+    out.imageUrl = UPLOADS_BASE + out.imageUrl;
+  }
+  for (const k in out) {
+    if (out[k] && typeof out[k] === 'object') out[k] = absolutize(out[k]);
+  }
+  return out;
+}
 
 async function safeFetch(url) {
   try {
     const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();
-    return Array.isArray(data) && data.length === 0 ? null : data;
+    if (Array.isArray(data) && data.length === 0) return null;
+    return absolutize(data);
   } catch {
     return null;
   }
@@ -19,7 +34,7 @@ async function adminFetch(url, options = {}) {
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || 'Request failed');
-  return data;
+  return absolutize(data);
 }
 
 // Public
