@@ -81,7 +81,7 @@ function NotifItem({ inquiry, onClose }) {
   );
 }
 
-const IDLE_TIMEOUT = 10 * 60 * 1000; // 10 minutes
+const IDLE_TIMEOUT = 20 * 60 * 1000; // 20 minutes
 
 function AdminLayout({ children }) {
   const location = useLocation();
@@ -102,6 +102,7 @@ function AdminLayout({ children }) {
       localStorage.removeItem('adminToken');
       localStorage.removeItem('adminUser');
       localStorage.removeItem('kandb_last_inquiry_time');
+      sessionStorage.setItem('adminLoggedOut', 'true');
       navigate('/admin/login');
     };
 
@@ -185,6 +186,7 @@ function AdminLayout({ children }) {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminUser');
     localStorage.removeItem('kandb_last_inquiry_time');
+    sessionStorage.setItem('adminLoggedOut', 'true');
     navigate('/admin/login');
   };
 

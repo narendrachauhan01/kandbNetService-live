@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { adminLogin } from '../api/api';
 import logo from '../assets/LogoImage/logo1.jpeg';
+import { MdCheckCircle } from 'react-icons/md';
 
 function AdminLogin() {
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem('adminLoggedOut')) {
+      sessionStorage.removeItem('adminLoggedOut');
+      setPopup('Logout Successfully');
+      setTimeout(() => setPopup(''), 3000);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +27,8 @@ function AdminLogin() {
       const data = await adminLogin(form.username, form.password);
       localStorage.setItem('adminToken', data.token);
       localStorage.setItem('adminUser', data.username);
-      navigate('/admin');
+      setPopup('Login Successfully');
+      setTimeout(() => navigate('/admin'), 1500);
     } catch (err) {
       setError(err.message || 'Login failed');
     } finally {
@@ -76,6 +87,13 @@ function AdminLogin() {
           &copy; {new Date().getFullYear()} K&B Net Service Admin
         </p>
       </div>
+
+      {popup && (
+        <div className="fixed top-6 right-6 z-50 flex items-center gap-3 bg-white border border-green-200 shadow-xl rounded-2xl px-5 py-4">
+          <MdCheckCircle size={22} className="text-green-500 flex-shrink-0" />
+          <span className="text-sm font-semibold text-gray-800">{popup}</span>
+        </div>
+      )}
     </div>
   );
 }
